@@ -15,7 +15,17 @@
         <a href="/host/add-home" class="px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition">Add a New Home</a>
       </div>
       <div id="homes-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <!-- Homes will be listed here -->
+        <h3>Registred homes are:</h3>
+        <ul>
+            <%homes.forEach((home)=>{%>
+
+              <li><%=home.homename%></li>
+            
+            <%})%> 
+        </ul>
+        
+
+      
       </div>
     </div>
   </body>

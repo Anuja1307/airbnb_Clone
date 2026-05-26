@@ -7,14 +7,19 @@ const path=require('path');
 
 //local modules
 const userRouter=require("./routes/userRouter");
-const hostRouter=require("./routes/hostRouter");
+const {hostRouter}=require("./routes/hostRouter");
 const rootDir=require("./utils/pathUtil")
 
 const app=express();
-app.set('view-engine','ejs');
+app.set('view engine','ejs');
 app.set('views','views');
 
-app.use(express.static(path.join(rootDir,"public")));
+app.use((req,res,next)=>
+  {
+    express.static(path.join(rootDir,"public"))
+    next();
+  })
+  ;
 
 
 app.use((req,res,next)=>{

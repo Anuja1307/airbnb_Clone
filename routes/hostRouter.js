@@ -9,15 +9,21 @@ const rootdir=require("../utils/pathUtil");
 
 const router=express.Router();
 
+router.use(express.urlencoded({ extended: false }))
+
 router.get("/add-home",(req,res,next)=>{
   res.sendFile(path.join(rootdir,"views","add_Home.html"))
 })
+const homes=[];
 
 router.post("/add-home",(req,res,next)=>{
-  res.sendFile(path.join(rootdir,"views","homeAdded.html"))
+  homes.push(req.body);
+  res.redirect('/')
+
 })
 
 
 
-module.exports=router;
+exports.hostRouter=router;   //exporting multiple objects
+exports.homes=homes;
 
