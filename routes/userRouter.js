@@ -12,7 +12,7 @@ const {homes}=require('./hostRouter');
 const router=express.Router();
 
 router.get("/",(req,res,next)=>{
-  res.render('home',{homes:homes})
+  res.render('home',{homes:homes,pageTitle:"Home"})
 })
 
 module.exports=router;

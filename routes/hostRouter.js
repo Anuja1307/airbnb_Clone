@@ -12,13 +12,13 @@ const router=express.Router();
 router.use(express.urlencoded({ extended: false }))
 
 router.get("/add-home",(req,res,next)=>{
-  res.sendFile(path.join(rootdir,"views","add_Home.html"))
+  res.render('add_Home',{pageTitle:"addHome"});
 })
 const homes=[];
 
 router.post("/add-home",(req,res,next)=>{
   homes.push(req.body);
-  res.redirect('/')
+  res.render('homeAdded',{pageTitle:'AddedHome'})
 
 })
 
