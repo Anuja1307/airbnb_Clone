@@ -10,10 +10,12 @@ const HomeController=require("../controllers/homes")
 
 const router=express.Router();
 
-router.get("/add-home",HomeController.getAddAddHome);
+router.get("/add_Home",HomeController.getAddAddHome);
 
 
-router.post("/add-home",HomeController.postAddHome);
+router.post("/add_Home",HomeController.postAddHome);
+
+router.get("/home-list",HomeController.getHomesHost)
 
 
 
