@@ -15,8 +15,10 @@ exports.postAddHome=(req,res,next)=>{
 
 
 exports.getHomes=(req,res,next)=>{
-  const registeredHomes=HomeModel.fetchAll()
-  res.render('home',{homes:registeredHomes,pageTitle:"Home"})
+  HomeModel.fetchAll((registeredHomes)=>{
+      res.render('home',{homes:registeredHomes,pageTitle:"Home"});
+  })
+  
 };
 
 
