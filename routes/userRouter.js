@@ -1,18 +1,10 @@
 //external modules
 const express=require('express');
 
-//core modules
-const path=require('path');
-
-//local modules
-const rootdir=require("../utils/pathUtil");
-
-const {homes}=require('./hostRouter');
+const HomeController=require("../controllers/homes")
 
 const router=express.Router();
 
-router.get("/",(req,res,next)=>{
-  res.render('home',{homes:homes,pageTitle:"Home"})
-})
+router.get("/",HomeController.getHomes);
 
 module.exports=router;

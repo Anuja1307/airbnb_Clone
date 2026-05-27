@@ -9,6 +9,7 @@ const path=require('path');
 const userRouter=require("./routes/userRouter");
 const {hostRouter}=require("./routes/hostRouter");
 const rootDir=require("./utils/pathUtil")
+const errorController=require("./controllers/error");
 
 const app=express();
 app.set('view engine','ejs');
@@ -21,19 +22,18 @@ app.use((req,res,next)=>
   })
   ;
 
-
 app.use((req,res,next)=>{
   console.log(req.url,req.method);
   next();
 })
 
+app.use(express.urlencoded({ extended: false }))
+
 app.use(userRouter);
 
 app.use("/host",hostRouter);
 
-app.use((req,res,next)=>{
-  res.render('404',{pageTitle:"404"})
-})
+app.use(errorController.default);
 
 
 
