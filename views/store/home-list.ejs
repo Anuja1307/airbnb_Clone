@@ -27,7 +27,14 @@
             <button class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
               Book Now
             </button>
+
+            <a href="/homes/<%= home.homeId %>" class="w-full mt-2 mb-2 bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg " >Details</a>
+
+                 <%- include("../partials/favourites",{home:home}) %>
           </div>
+
+
+
          
         <% }) %>
 

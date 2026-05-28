@@ -1,0 +1,28 @@
+<%- include('../partials/head') %>
+</head>
+<body class="bg-gray-50 flex flex-col items-center justify-center min-h-screen">
+
+<%- include('../partials/nav') %>
+  <div id="homes-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-6xl px-4 py-8">
+    <div class="col-span-full mb-6">
+      <h3 class="text-3xl font-bold text-gray-900 mb-2">Details of Home <%= home.homeId %></h3>
+      <div class="h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded"></div>
+    </div>
+    
+    <div class="col-span-full">
+      <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 flex flex-col h-full border-l-4 border-blue-500">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4"><%= home.homename %></h2>
+        
+        <img src="<%= home.photo %>" alt="home image" class="w-full h-64 object-cover rounded-lg mb-6 shadow-md hover:scale-105 transition-transform duration-300"/>
+        
+        <div class="flex-grow space-y-4 mb-6">
+          <p class="text-gray-700"><span class="font-semibold text-gray-900">Location:</span> <span class="text-gray-600"><%= home.location %></span></p>
+          <p class="text-gray-700"><span class="font-semibold text-gray-900">Rating:</span> <span class="text-yellow-500 font-bold"><%= home.rating %> ⭐</span></p>
+          <p class="text-3xl font-bold text-green-600 mt-4 flex items-center gap-2">💰 <%= home.price %></p>
+
+          <%- include("../partials/favourites",{home:home}) %>
+
+        </div>
+      </div>
+    </div>
+  </div>

@@ -39,9 +39,11 @@
                             <span>₹<%= home.price %> / night</span>
                         </div>
 
-                        <button class="w-full bg-green-500 text-white py-2 rounded-full hover:bg-red-600 transition font-semibold">
+                        <button class="w-full bg-green-500 text-white py-2 mb-2 rounded-full hover:bg-red-600 transition font-semibold">
                             Book Now
                         </button>
+
+                            <%- include("../partials/favourites",{home:home}) %>
                     </div>
                 </div>
             <% }) %>

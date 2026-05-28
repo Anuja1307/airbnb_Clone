@@ -4,6 +4,7 @@ const fs=require('fs');
 
 //local modules
 const rootDir=require("../utils/pathUtil");
+const filePath=path.join(rootDir,'data','Homes.json')
 
 const registeredHomes=[]; //fake db
 
@@ -17,13 +18,14 @@ module.exports=class Home{
   }
 
   save(){
+    this.homeId=Math.random();
     Home.fetchAll((registeredHomes)=>{
         registeredHomes.push(this);
         const filePath=path.join(rootDir,'data','Homes.json')
         fs.writeFile(filePath,JSON.stringify(registeredHomes),(err)=>
           {
                console.log(err);
-        }
+          }
       )
     })
   
@@ -31,7 +33,7 @@ module.exports=class Home{
   }
 
   static fetchAll(callback){
-    const filePath=path.join(rootDir,'data','Homes.json')
+    
     fs.readFile(filePath,(err,data)=>{
       let homes=[];
       if(!err){
@@ -39,5 +41,13 @@ module.exports=class Home{
       }
       callback(homes);
     })
+  }
+
+  static findById(homeId,callback){
+    this.fetchAll((homes)=>{
+      const homeFound=homes.find(home => home.homeId.toString()===homeId.toString());
+      callback(homeFound)
+    })
+
   }
 }

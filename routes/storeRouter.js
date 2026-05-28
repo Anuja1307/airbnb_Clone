@@ -1,16 +1,20 @@
 //external modules
 const express=require('express');
 
-const HomeController=require("../controllers/homes")
+const storeController=require("../controllers/storeController")
 
 const router=express.Router();
 
-router.get("/",HomeController.getIndex);
+router.get("/",storeController.getIndex);
 
-router.get('/bookings',HomeController.getBookings);
+router.get('/bookings',storeController.getBookings);
 
-router.get('/index',HomeController.getHomes);
+router.get('/index',storeController.getHomes);
 
-router.get('/favorites',HomeController.getFavorites);
+router.get('/favorites',storeController.getFavorites);
+
+router.post('/favourites',storeController.postFavorites)
+
+router.get('/homes/:homeId',storeController.getHomeDetails)
 
 module.exports=router;

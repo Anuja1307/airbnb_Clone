@@ -6,7 +6,7 @@ const express=require('express');
 
 //local
 const rootdir=require("../utils/pathUtil");
-const HomeController=require("../controllers/homes")
+const HomeController=require("../controllers/hostController")
 
 const router=express.Router();
 
