@@ -30,4 +30,16 @@ module.exports=class Favourites{
       })
 
    }
+   static deleteById(delHomeId,callback){
+    Favourites.getFavourites(favourites=>{
+      const favs=favourites.filter(fav=>{
+       return fav.toString() !== delHomeId.toString();
+      })
+      fs.writeFile(filePath, JSON.stringify(favs), err => {
+          if(err) console.log("Error in writing to file", err)
+          callback();
+})
+    })
+   }
+
 }

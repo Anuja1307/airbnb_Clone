@@ -54,3 +54,14 @@ exports.postFavorites=((req,res,next)=>{
   Favourites.addToFavourites(req.body.id)
   res.redirect('/favorites')
 })
+
+exports.postDeleteFavourites=(req,res,next)=>{
+  const homeId=req.params.homeId;
+  console.log('delete home',homeId)
+  Favourites.deleteById(homeId,(error)=>{
+    if(error){
+        console.log("error in controller");
+    }
+    res.redirect('/favorites');
+  })
+}

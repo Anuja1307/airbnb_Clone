@@ -4,6 +4,7 @@ const fs=require('fs');
 
 //local modules
 const rootDir=require("../utils/pathUtil");
+const Favourites = require('./favourites');
 const filePath=path.join(rootDir,'data','Homes.json')
 
 const registeredHomes=[]; //fake db
@@ -76,7 +77,7 @@ module.exports=class Home{
 
         fs.writeFile(filePath, JSON.stringify(updatedHomes), (err) => {
             if(err) console.log("Error deleting:", err)
-            callback(err)
+            Favourites.deleteById(homeId,callback);
         })
     })
 }

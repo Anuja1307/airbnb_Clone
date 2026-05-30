@@ -51,6 +51,7 @@ exports.postEditHome=(req,res,next)=>{
 
 exports.postDeleteHome=(req,res,next)=>{
   const homeId=req.params.homeId;
+
   console.log(homeId);
   HomeModel.deleteById(homeId,(error)=>{
     if(error){
