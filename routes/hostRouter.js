@@ -17,11 +17,11 @@ router.post("/add_Home",HostController.postAddHome);
 
 router.get("/home-list",HostController.getHomesHost)
 
-router.get("/edit_Home/:homeId",HostController.getEditHome);
+router.get("/edit_Home/:_id",HostController.getEditHome);
 
 router.post("/edit_Home",HostController.postEditHome);
 
-router.post("/delete_home/:homeId",HostController.postDeleteHome);
+router.post("/delete_home/:_id",HostController.postDeleteHome);
 
 
 

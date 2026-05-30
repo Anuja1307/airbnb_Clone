@@ -1,4 +1,5 @@
-const db=require("../utils/database");
+const { ObjectId } = require("mongodb");
+const {getDB}=require("../utils/database");
 
 
 module.exports=class Home{
@@ -9,29 +10,48 @@ module.exports=class Home{
     this.rating=rating;
     this.photoURL=photo;
     this.description=description;
+    if(this._id){
+      this._id=_id;
+     }
   }
 
   save() {
-    if(this.homeId){
-      return db.execute("Update Homes set homename=? ,price=?,location=?,rating=?,photoURL=?,description=? where homeId=? ",[this.homename,this.price,this.location,this.rating,this.photoURL,this.description,this.homeId]);
+    const db=getDB();
+    if(this._id){
+      const updatedFields={
+        "homename":this.homename,
+        "price":this.price,
+        "location":this.location,
+        "rating":this.rating,
+        "photoURL":this.photoURL,
+        "description":this.description
+      }
+      return db.collection('homes').updateOne({_id:new ObjectId(String(this._id))},{$set:updatedFields})
+      
     }
-    return db.execute(
-        "INSERT INTO homes (homename, price, location, rating, photoURL, description) VALUES (?,?,?,?,?,?)",
-        [this.homename, this.price, this.location, this.rating, this.photoURL, this.description]
-    )
+
+    return db.collection('homes').insertOne(this);
+
 }
 
   static fetchAll(){
-    return db.execute("SELECT * from homes");
+    const db=getDB();
+    return db.collection('homes').find().toArray();
   }
 
-  static findById(homeId){
-      return db.execute("SELECT * FROM homes where homeId=?",[homeId]);
+  static findById(_id){
+    const db=getDB();
+    console.log('The id is',_id)
+    return db.collection('homes').findOne({_id:new ObjectId(String(_id))})
   
   }
 
-  static deleteById(homeId, callback) { 
-    return db.execute("DELETE FROM homes where homeId=(?)",[homeId]);
+  static deleteById(_id) { 
+ 
+    const db=getDB();
+    console.log('The id is',_id)
+    return db.collection('homes').deleteOne({_id:new ObjectId(String(_id))})
+  
    
 }
 }

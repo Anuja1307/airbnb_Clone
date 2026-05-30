@@ -15,8 +15,8 @@ router.get('/favorites',storeController.getFavorites);
 
 router.post('/favourites',storeController.postFavorites)
 
-router.post('/favourites/delete/:homeId',storeController.postDeleteFavourites);
+router.post('/favourites/delete/:_id',storeController.postDeleteFavourites);
 
-router.get('/homes/:homeId',storeController.getHomeDetails)
+router.get('/homes/:_id',storeController.getHomeDetails)
 
 module.exports=router;

@@ -1,10 +1,24 @@
-const mysql = require("mysql2")
+const mongo=require('mongodb');
 
-const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: '',
-    database: 'airbnb'
-})
+const mongoClient=mongo.MongoClient;
 
-module.exports = pool.promise()
+const mongo_URL="mongodb+srv://root:root@airbnb.6j5lqiw.mongodb.net/?appName=airbnb"
+
+let _db;
+
+const mongoConnection=(callback)=>{
+  mongoClient.connect(mongo_URL).then(client =>{
+    _db=client.db('airbnb')
+    callback(client);
+
+  }).catch((err)=>{
+    console.log("Error");
+  })
+}
+
+const getDB=()=>{
+  return _db;
+}
+
+exports.mongoConnect=mongoConnection;
+exports.getDB=getDB;

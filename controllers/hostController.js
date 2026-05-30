@@ -8,27 +8,29 @@ exports.postAddHome = (req, res, next) => {
     const home = new HomeModel(homename, price, location, rating, photo, description)
     
     home.save()
-        .then(() => {
-            res.redirect('/host/home-list') 
+        .then((home) => {
+            console.log("Home saved")
+            res.redirect('/host/home-list')
         })
         .catch((err) => {
             console.log(err) 
+            res.redirect('/host/home-list')
         })
 }
 
 
 exports.getHomesHost=(req,res,next)=>{
-  HomeModel.fetchAll().then(([homes])=>{
+  HomeModel.fetchAll().then((homes)=>{
     res.render('host/host-home-list',{homes:homes,pageTitle:'Host Homes'})
   })
 }
 
 exports.getEditHome=(req,res,next)=>{
-  const homeId=req.params.homeId ;
+  const _id=req.params._id ;
   const editing=req.query.editing === "true" ;
-  console.log(homeId,editing);
-  HomeModel.findById(homeId).then(([homes])=>{
-    const home=homes[0];
+  console.log(_id,editing);
+  HomeModel.findById(_id).then((home)=>{
+    
     if(!home){
       console.log("Homme not available for editing")
       return res.redirect("/host/home-list")
@@ -42,10 +44,10 @@ exports.getEditHome=(req,res,next)=>{
 
 exports.postEditHome=(req,res,next)=>{
 
-  const {homeId,homename,price,location,rating,photo,description}=req.body;
+  const {_id,homename,price,location,rating,photo,description}=req.body;
   const home=new HomeModel(homename,price,location,rating,photo,description);
-  home.homeId=homeId;
-  console.log(home,homeId);
+  home._id=_id;
+  console.log(home,_id);
   console.log('In post of edit home');
   home.save().then(()=>{
       res.redirect('/host/home-list');
@@ -57,10 +59,10 @@ exports.postEditHome=(req,res,next)=>{
 }
 
 exports.postDeleteHome=(req,res,next)=>{
-  const homeId=req.params.homeId;
+  const _id=req.params._id;
 
-  console.log(homeId);
-  HomeModel.deleteById(homeId).then(()=>
+  console.log(_id);
+  HomeModel.deleteById(_id).then(()=>
     {
       res.redirect("/host/home-list");
     })

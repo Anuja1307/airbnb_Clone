@@ -11,6 +11,8 @@ const {hostRouter}=require("./routes/hostRouter");
 const rootDir=require("./utils/pathUtil")
 const errorController=require("./controllers/error");
 
+const {mongoConnect}=require("./utils/database");
+
 
 
 const app=express();
@@ -37,7 +39,12 @@ app.use(errorController.default);
 
 
 const PORT=3000;
-app.listen(PORT,()=>{
+
+
+mongoConnect(client=>{
+  app.listen(PORT,()=>{
   console.log(`The server is hosted on http://localhost:${PORT}/`);
 })
+})
+
 
