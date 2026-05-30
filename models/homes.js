@@ -18,14 +18,29 @@ module.exports=class Home{
   }
 
   save(){
-    this.homeId=Math.random();
+  
     Home.fetchAll((registeredHomes)=>{
-        registeredHomes.push(this);
-        const filePath=path.join(rootDir,'data','Homes.json')
-        fs.writeFile(filePath,JSON.stringify(registeredHomes),(err)=>
-          {
-               console.log(err);
+      if(this.homeId){
+        registeredHomes=registeredHomes.map(home=>{
+          if(home.homeId.toString()===this.homeId.toString()){
+            return this;
           }
+          else{
+            return home;
+          }
+        });
+
+      }
+      else{
+        this.id=Math.random().toString();
+        registeredHomes.push(this);  
+      }
+       
+      const filePath=path.join(rootDir,'data','Homes.json')
+      fs.writeFile(filePath,JSON.stringify(registeredHomes),(err)=>
+        {
+          console.log(err);
+        }
       )
     })
   
@@ -50,4 +65,20 @@ module.exports=class Home{
     })
 
   }
+
+  static deleteById(homeId, callback) { 
+   
+    
+    Home.fetchAll((homes) => {
+        const updatedHomes = homes.filter(home => 
+            home.homeId.toString() !== homeId.toString()
+        )
+
+        fs.writeFile(filePath, JSON.stringify(updatedHomes), (err) => {
+            if(err) console.log("Error deleting:", err)
+            callback(err)
+        })
+    })
 }
+}
+

@@ -6,16 +6,22 @@ const express=require('express');
 
 //local
 const rootdir=require("../utils/pathUtil");
-const HomeController=require("../controllers/hostController")
+const HostController=require("../controllers/hostController")
 
 const router=express.Router();
 
-router.get("/add_Home",HomeController.getAddAddHome);
+router.get("/add_Home",HostController.getAddHome);
 
 
-router.post("/add_Home",HomeController.postAddHome);
+router.post("/add_Home",HostController.postAddHome);
 
-router.get("/home-list",HomeController.getHomesHost)
+router.get("/home-list",HostController.getHomesHost)
+
+router.get("/edit_Home/:homeId",HostController.getEditHome);
+
+router.post("/edit_Home",HostController.postEditHome);
+
+router.post("/delete_home/:homeId",HostController.postDeleteHome);
 
 
 

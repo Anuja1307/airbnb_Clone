@@ -1,1 +1,34 @@
-[{"homeId":1,"homename":"sweet home","price":"1000","location":"tirupur","rating":"5","photo":"https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600"},{"homeId":2,"homename":"tree house","price":"1200","location":"tirupur","rating":"4.9","photo":"https://imgs.search.brave.com/R8vPOS8Ss-RiBAIKjdnET1n90f3bL1CHy0H8AfUsVZU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5jbnRyYXZlbGVy/LmNvbS9waG90b3Mv/NjBlNjMwYjg5ZjIy/Y2EzMWJlZmI0NjE2/LzQ6My93Xzc0OCxj/X2xpbWl0L2FpcmJu/YiUyMDIwNDc1NDUy/LmpwZWc"}]
+[
+  {
+    "homeId": "1",
+    "homename": "Ocean Breeze Villa",
+    "price": "5000",
+    "location": "Goa",
+    "rating": "4.8",
+    "photo": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600"
+  },
+  {
+    "homeId": "2",
+    "homename": "Mountain Retreat",
+    "price": "3500",
+    "location": "Manali",
+    "rating": "4.6",
+    "photo": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600"
+  },
+  {
+    "homeId": "3",
+    "homename": "City Center Apartment",
+    "price": "2500",
+    "location": "Mumbai",
+    "rating": "4.5",
+    "photo": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600"
+  },
+  {
+    "homeId": "4",
+    "homename": "Cozy Beach Cottage",
+    "price": "4000",
+    "location": "Kerala",
+    "rating": "4.9",
+    "photo": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600"
+  }
+]

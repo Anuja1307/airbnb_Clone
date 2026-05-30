@@ -1,0 +1,49 @@
+<%- include('../partials/head') %>
+<body class="bg-gray-50 flex flex-col items-center justify-center min-h-screen">
+
+    <%- include('../partials/nav') %>
+
+    <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md mt-10">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+            <%= editing ? "Edit" : "Register New" %> Home
+        </h1>
+
+        <form action="<%= editing ? '/host/edit_Home' : '/host/add-Home' %>" method="post" class="space-y-4">
+            
+            <% if(editing) { %>
+                <input type="hidden" name="homeId" value="<%= home.homeId %>"/>
+            <% } %>
+
+            <input type="text" name="homename" 
+                value="<%= editing ? home.homename : '' %>" 
+                placeholder="Home name" required 
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"/>
+
+            <input type="text" name="price" 
+                value="<%= editing ? home.price : '' %>" 
+                placeholder="Price per night" 
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"/>
+
+            <input type="text" name="location" 
+                value="<%= editing ? home.location : '' %>" 
+                placeholder="Location" 
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"/>
+
+            <input type="text" name="rating" 
+                value="<%= editing ? home.rating : '' %>" 
+                placeholder="Rating" 
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"/>
+
+            <input type="text" name="photo" 
+                value="<%= editing ? home.photo : '' %>" 
+                placeholder="Photo URL" 
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"/>
+
+            <button type="submit" class="w-full py-2 bg-red-500 text-white rounded-full font-semibold hover:bg-red-600 transition">
+                <%= editing ? "Update" : "Submit" %>
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>
