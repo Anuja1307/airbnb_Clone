@@ -2,9 +2,10 @@ const Favourites = require('../models/favourites');
 const HomeModel=require('../models/homes');
 
 exports.getHomes=(req,res,next)=>{
-  HomeModel.fetchAll((registeredHomes)=>{
+  HomeModel.fetchAll().then(([registeredHomes]) =>{
       res.render('store/home-list',{homes:registeredHomes,pageTitle:"Home"});
   })
+
   
 };
 
@@ -13,7 +14,7 @@ exports.getBookings=((req,res,next)=>{
 })
 
 exports.getIndex=((req,res,next)=>{
-  HomeModel.fetchAll((registeredHomes)=>{
+ HomeModel.fetchAll().then(([registeredHomes])=>{
     res.render('store/index',{homes:registeredHomes,pageTitle:'Indexx'})
   })
 })
@@ -22,7 +23,7 @@ exports.getFavorites = ((req, res, next) => {
     Favourites.getFavourites((favourites) => {
         console.log("Favourites from file:", favourites) // what's in json file?
         
-        HomeModel.fetchAll((homes) => {
+       HomeModel.fetchAll().then(([homes]) => {
             console.log("All homes:", homes.map(h => h.homeId)) // what homeIds exist?
             
             const filteredHomes = homes.filter(home => 
@@ -39,7 +40,8 @@ exports.getFavorites = ((req, res, next) => {
 exports.getHomeDetails=(req,res,next)=>{
   const homeId=req.params.homeId;
   console.log(homeId);
-  HomeModel.findById(homeId,(home)=>{
+  HomeModel.findById(homeId).then(([homes])=>{
+    const home=homes[0];
     if(!home){
       //res.redirect('/');
     }

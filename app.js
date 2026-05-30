@@ -11,6 +11,8 @@ const {hostRouter}=require("./routes/hostRouter");
 const rootDir=require("./utils/pathUtil")
 const errorController=require("./controllers/error");
 
+
+
 const app=express();
 app.set('view engine','ejs');
 app.set('views','views');

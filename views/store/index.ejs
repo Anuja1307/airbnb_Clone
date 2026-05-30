@@ -10,7 +10,7 @@
     <div class="container mx-auto py-10 px-4">
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-4xl font-bold text-gray-800">Available Homes</h1>
-            <a href="/host/add-Home" class="px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition">Add a New Home</a>
+            <a href="/host/add_Home" class="px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition">Add a New Home</a>
         </div>
 
         <h3 class="text-2xl font-semibold text-gray-700 mb-6">Welcome to Airbnb</h3>
@@ -19,7 +19,7 @@
             <% homes.forEach((home) => { %>
                 <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                     
-                    <img src="<%= home.photo %>" alt="home image" class="w-full h-52 object-cover"/>
+                    <img src="<%= home.photoURL %>" alt="home image" class="w-full h-52 object-cover"/>
                     
                     <div class="p-5">
                         <h2 class="text-xl font-bold text-gray-800 mb-2"><%= home.homename %></h2>
