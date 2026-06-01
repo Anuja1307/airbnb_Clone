@@ -4,8 +4,8 @@ exports.getAddHome=(req,res,next)=>{
   res.render('host/edit_Home',{pageTitle:"addHome",editing:false});
 }
 exports.postAddHome = (req, res, next) => {
-    const {homename, price, location, rating, photo, description} = req.body
-    const home = new HomeModel(homename, price, location, rating, photo, description)
+    const {homename, price, location, rating, photoURL, description} = req.body
+    const home = new HomeModel({homename, price, location, rating, photoURL, description})
     
     home.save()
         .then((home) => {
@@ -20,7 +20,7 @@ exports.postAddHome = (req, res, next) => {
 
 
 exports.getHomesHost=(req,res,next)=>{
-  HomeModel.fetchAll().then((homes)=>{
+  HomeModel.find().then((homes)=>{
     res.render('host/host-home-list',{homes:homes,pageTitle:'Host Homes'})
   })
 }
@@ -44,17 +44,20 @@ exports.getEditHome=(req,res,next)=>{
 
 exports.postEditHome=(req,res,next)=>{
 
-  const {_id,homename,price,location,rating,photo,description}=req.body;
-  const home=new HomeModel(homename,price,location,rating,photo,description);
-  home._id=_id;
-  console.log(home,_id);
-  console.log('In post of edit home');
-  home.save().then(()=>{
+  const {_id,homename,price,location,rating,photoURL,description}=req.body;
+  HomeModel.findById(_id).then((home)=>{
+    home.homename=homename;
+    home.price=price;
+    home.location=location;
+    home.rating=rating;
+    home.photoURL=photoURL;
+    home.description=description;
+    home.save().then(()=>{
       res.redirect('/host/home-list');
-  }).catch(err=>{
-    console.log(err);
+    }).catch(err=>{
+      console.log(err);
+    })
   })
-
 
 }
 
@@ -62,7 +65,7 @@ exports.postDeleteHome=(req,res,next)=>{
   const _id=req.params._id;
 
   console.log(_id);
-  HomeModel.deleteById(_id).then(()=>
+  HomeModel.findByIdAndDelete(_id).then(()=>
     {
       res.redirect("/host/home-list");
     })
