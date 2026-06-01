@@ -9,6 +9,7 @@ const path=require('path');
 //local modules
 const userRouter=require("./routes/storeRouter");
 const {hostRouter}=require("./routes/hostRouter");
+const authRouter=require("./routes/authRouter")
 const rootDir=require("./utils/pathUtil")
 const errorController=require("./controllers/error");
 
@@ -30,6 +31,8 @@ app.use((req,res,next)=>{
 })
 
 app.use(express.urlencoded({ extended: false }))
+
+app.use(authRouter);
 
 app.use(userRouter);
 
