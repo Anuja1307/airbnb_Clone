@@ -1,9 +1,11 @@
 <header class="bg-red-500 text-white p-4 shadow-md">
     <nav class="container mx-auto flex justify-between items-center">
         <ul class="flex space-x-4">
+           
             <li>
                 <a href="/" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">Go to Home</a>
             </li>
+             <% if(isLoggedIn) { %>
            
              <li>
                 <a href="/bookings" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">Bookings</a>
@@ -22,9 +24,20 @@
              <li>
                 <a href="/host/home-list" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">Host Homes</a>
             </li>
+            <% } %>
+            <% if(!isLoggedIn) {%>
             <li>
                 <a href="/login" class="hover:bg-red-600 bg-red-700 py-2 px-6 rounded-lg transition duration-300 font-semibold shadow-lg">Login</a>
             </li>
+            <% }else {%>
+                <form action="/logout" method="post">
+
+                <button class="hover:bg-red-600 bg-red-700 py-2 px-6 rounded-lg transition duration-300 font-semibold shadow-lg" type="submit">Logout</button>
+
+                </form>
+                
+            <% } %>
+
 
         </ul>
         </ul>

@@ -1,8 +1,16 @@
 exports.getLogin=(req,res,next)=>{
-  res.render('auth/login',{pageTitle:'Login'})
+  
+  res.render('auth/login',{pageTitle:'Login',isLoggedIn:false})
 }
 
 exports.postLogin=(req,res,next)=>{
-  req.isLoggedIn=true;
-  res.redirect('/')
+  req.session.isLoggedIn=true;
+  res.redirect('/');
+}
+
+exports.postLogout=(req,res,next)=>{
+  req.session.destroy(()=>{
+      res.redirect('/')
+  })
+
 }
