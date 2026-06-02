@@ -1,7 +1,7 @@
 const HomeModel=require('../models/homes');//model imported 
 
 exports.getAddHome=(req,res,next)=>{
-  res.render('host/edit_Home',{pageTitle:"addHome",editing:false,isLoggedIn:req.isLoggedIn});
+  res.render('host/edit_Home',{pageTitle:"addHome",editing:false,isLoggedIn:req.isLoggedIn,user:req.user});
 }
 exports.postAddHome = (req, res, next) => {
     const {homename, price, location, rating, photoURL, description} = req.body
@@ -21,7 +21,7 @@ exports.postAddHome = (req, res, next) => {
 
 exports.getHomesHost=(req,res,next)=>{
   HomeModel.find().then((homes)=>{
-    res.render('host/host-home-list',{homes:homes,pageTitle:'Host Homes',isLoggedIn:req.isLoggedIn})
+    res.render('host/host-home-list',{homes:homes,pageTitle:'Host Homes',isLoggedIn:req.isLoggedIn,user:req.user})
   })
 }
 
@@ -36,7 +36,7 @@ exports.getEditHome=(req,res,next)=>{
       return res.redirect("/host/home-list")
     }
      console.log(home)
-     res.render("host/edit_Home",{home:home,editing:editing,pageTitle:"edit Home",isLoggedIn:req.isLoggedIn});
+     res.render("host/edit_Home",{home:home,editing:editing,pageTitle:"edit Home",isLoggedIn:req.isLoggedIn,user:req.user});
   })
  
   

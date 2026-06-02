@@ -1,0 +1,116 @@
+
+<%- include('../partials/head') %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  .input-wrapper {
+    position: relative;
+  }
+
+  .input-wrapper.error input {
+    border-color: #ff385c !important;
+    background-color: #fff5f5 !important;
+  }
+
+  .error-alert {
+    max-height: 120px;
+    overflow-y: auto;
+  }
+</style>
+
+<body class="bg-gray-50 min-h-screen flex items-center justify-center pt-4 pb-4">
+
+    <%- include('../partials/nav') %>
+
+    <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-sm">
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-900 mb-1">Join Airbnb</h1>
+            <p class="text-gray-600 text-sm">Create your account to get started</p>
+        </div>
+
+
+        <form action="/signUp" method="post" class="space-y-3">
+             <%- include('../partials/errors') %>
+            
+            <div class="grid grid-cols-2 gap-2">
+                <div class="form-group">
+                    <label for="firstName" class="text-sm font-semibold text-gray-800 block mb-1">First Name</label>
+                    <div class="input-wrapper <%= oldInput ? 'error' : '' %>">
+                        <i class="fas fa-user absolute left-3 top-3 text-red-500"></i>
+                        <input type="text" name="firstName" id="firstName" placeholder="John" value="<%= oldInput && oldInput.firstName? oldInput.firstName: '' %>" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition" required/>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName" class="text-sm font-semibold text-gray-800 block mb-1">Last Name</label>
+                    <div class="input-wrapper <%= oldInput ? 'error' : '' %>">
+                        <i class="fas fa-user absolute left-3 top-3 text-red-500"></i>
+                        <input type="text" name="LastName" id="lastName" placeholder="Doe" value="<%= oldInput && oldInput.LastName? oldInput.LastName: '' %>" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition" required/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="text-sm font-semibold text-gray-800 block mb-1">Email</label>
+                <div class="input-wrapper <%= oldInput ? 'error' : '' %>">
+                    <i class="fas fa-envelope absolute left-3 top-3 text-red-500"></i>
+                    <input type="email" name="username" id="email" placeholder="john@example.com" value="<%= oldInput && oldInput.username? oldInput.username: '' %>" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition" required/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="text-sm font-semibold text-gray-800 block mb-1">Password</label>
+                <div class="input-wrapper <%= oldInput ? 'error' : '' %>">
+                    <i class="fas fa-lock absolute left-3 top-3 text-red-500"></i>
+                    <input type="password" name="password" id="password" placeholder="Enter password" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition" required/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword" class="text-sm font-semibold text-gray-800 block mb-1">Confirm Password</label>
+                <div class="input-wrapper <%= oldInput ? 'error' : '' %>">
+                    <i class="fas fa-lock absolute left-3 top-3 text-red-500"></i>
+                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition" required/>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <label class="text-sm font-semibold text-gray-900 mb-2 block">I am signing up as:</label>
+                <div class="space-y-2 <%= oldInput ? 'border-l-2 border-red-500 pl-2' : '' %>">
+                    <div class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                        <input type="radio" name="userType" id="guest" value="guest" <%= oldInput && oldInput.userType === 'guest' ? 'checked' : '' %> class="w-4 h-4 accent-red-500" required/>
+                        <label for="guest" class="ml-3 text-sm font-medium text-gray-700 cursor-pointer flex items-center">
+                            <i class="fas fa-home text-red-500 mr-2"></i> Guest
+                        </label>
+                    </div>
+                    <div class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                        <input type="radio" name="userType" id="host" value="host" <%= oldInput && oldInput.userType === 'host' ? 'checked' : '' %> class="w-4 h-4 accent-red-500" required/>
+                        <label for="host" class="ml-3 text-sm font-medium text-gray-700 cursor-pointer flex items-center">
+                            <i class="fas fa-key text-red-500 mr-2"></i> Host
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <div class="space-y-2 <%= oldInput ? 'border-l-2 border-red-500 pl-2' : '' %>">
+                    <div class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                        <input type="checkbox" name="check" id="terms" class="w-4 h-4 accent-red-500" required/>
+                        <label for="terms" class="ml-3 text-sm font-medium text-gray-700 cursor-pointer flex items-center">
+                            <i class="fas fa-check-circle text-red-500 mr-2"></i> I agree to Terms & Privacy
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full py-2.5 mt-4 bg-red-500 hover:bg-red-600 text-white rounded-full font-bold text-base shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2">
+                <i class="fas fa-user-plus"></i> Create Account
+            </button>
+
+            <p class="text-center text-gray-600 text-xs mt-3">
+                Already have an account? <a href="/login" class="text-red-500 font-semibold hover:text-red-600 transition">Sign In</a>
+            </p>
+        </form>
+    </div>
+
+</body>
+</html>

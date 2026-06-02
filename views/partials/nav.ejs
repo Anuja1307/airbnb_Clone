@@ -1,45 +1,57 @@
-<header class="bg-red-500 text-white p-4 shadow-md">
-    <nav class="container mx-auto flex justify-between items-center">
-        <ul class="flex space-x-4">
+<header class="bg-red-500 shadow-md sticky top-0 z-50 transition-all duration-300">
+    <nav class="container mx-auto flex justify-between items-center px-6 py-4">
+        
+        <div class="flex items-center">
+            <a href="/" class="text-2xl font-bold text-white hover:text-red-100 hover:scale-110 transition-transform duration-300">🏠 Airbnb</a>
+        </div>
+
+        <ul class="hidden md:flex items-center space-x-1">
            
             <li>
-                <a href="/" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">Go to Home</a>
+                <a href="/" class="py-2 px-4 text-white font-medium hover:text-red-100 hover:bg-red-400 rounded-lg transition duration-200 transform hover:scale-105">Home</a>
             </li>
-             <% if(isLoggedIn) { %>
-           
-             <li>
-                <a href="/bookings" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">Bookings</a>
-            </li>
-               <li>
-                <a href="/index" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">Homes-list</a>
-            </li>
-               <li>
-                <a href="/favorites" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">Favourites</a>
-            </li>
-
-             <li>
-                <a href="/host/add_Home" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">Add Home</a>
-            </li>
-
-             <li>
-                <a href="/host/home-list" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">Host Homes</a>
-            </li>
-            <% } %>
-            <% if(!isLoggedIn) {%>
-            <li>
-                <a href="/login" class="hover:bg-red-600 bg-red-700 py-2 px-6 rounded-lg transition duration-300 font-semibold shadow-lg">Login</a>
-            </li>
-            <% }else {%>
-                <form action="/logout" method="post">
-
-                <button class="hover:bg-red-600 bg-red-700 py-2 px-6 rounded-lg transition duration-300 font-semibold shadow-lg" type="submit">Logout</button>
-
-                </form>
+            
+            <% if(isLoggedIn) { %>
                 
+                <% if (user && user.userType && user.userType.toLowerCase() == 'guest') { %>
+           
+                <li>
+                    <a href="/index" class="py-2 px-4 text-white font-medium hover:text-red-100 hover:bg-red-400 rounded-lg transition duration-200 transform hover:scale-105">Homes</a>
+                </li>
+
+                <li>
+                    <a href="/favorites" class="py-2 px-4 text-white font-medium hover:text-red-100 hover:bg-red-400 rounded-lg transition duration-200 transform hover:scale-105">❤️ Favorites</a>
+                </li>
+
+                <li>
+                    <a href="/bookings" class="py-2 px-4 text-white font-medium hover:text-red-100 hover:bg-red-400 rounded-lg transition duration-200 transform hover:scale-105">Bookings</a>
+                </li>
+                <% } else if (user && user.userType && user.userType.toLowerCase() =='host') { %>
+
+                <li>
+                    <a href="/host/add_Home" class="py-2 px-4 text-white font-medium hover:text-red-100 hover:bg-red-400 rounded-lg transition duration-200 transform hover:scale-105">Add Home</a>
+                </li>
+
+                <li>
+                    <a href="/host/home-list" class="py-2 px-4 text-white font-medium hover:text-red-100 hover:bg-red-400 rounded-lg transition duration-200 transform hover:scale-105">My Homes</a>
+                </li>
+            
+                <% } else { %>
+                    <!-- User logged in but no valid userType: <%= user ? user.userType : 'no user' %> -->
+                <% } %>
             <% } %>
-
-
         </ul>
-        </ul>
+
+        <div class="flex items-center space-x-3">
+            <% if(!isLoggedIn) {%>
+                <a href="/signUp" class="py-2 px-6 text-white font-semibold hover:bg-red-600 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg">Sign Up</a>
+                <a href="/login" class="py-2 px-6 bg-white text-red-500 font-semibold hover:bg-red-50 rounded-full transition duration-300 shadow-md transform hover:scale-105 hover:shadow-xl">Login</a>
+            <% } else {%>
+                <form action="/logout" method="post" class="m-0">
+                    <button type="submit" class="py-2 px-6 bg-white text-red-500 font-semibold hover:bg-red-50 rounded-full transition duration-300 shadow-md cursor-pointer border-0 transform hover:scale-105 hover:shadow-xl">Logout</button>
+                </form>
+            <% } %>
+        </div>
+
     </nav>
 </header>
